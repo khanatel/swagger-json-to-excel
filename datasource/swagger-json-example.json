@@ -1,0 +1,300 @@
+{
+  "swagger": "2.0",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "info": {
+    "version": "1.0.0",
+    "title": "Entites Service",
+    "description": "Simple json from swagger",
+    "contact": {
+      "name": "Simple Sawgger Json",
+      "url": "https://nottfree.wordpress.com",
+      "email": "nott.free@hotmail.com"
+    }
+  },
+  "paths": {
+    "/entities": {
+      "get": {
+        "operationId": "queryEntities",
+        "summary": "List all Entities of system",
+        "description": "Get entities for all ENTITY objects of system.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "token",
+            "required": true,
+            "type": "string",
+            "description": "for access token (when you login)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Entity"
+              }
+            }
+          },
+          "401": {
+            "description": "error"
+          },
+          "500": {
+            "description": "error"
+          }
+        }
+      },
+      "post": {
+        "operationId": "createEntity",
+        "summary": "Create new Entity",
+        "description": "Post for create new Entity",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "token",
+            "required": true,
+            "type": "string",
+            "description": "for access token (when you login)"
+          },
+          {
+            "in": "body",
+            "description": "The new Entity to create",
+            "schema": {
+              "$ref": "#/definitions/Entity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Entity"
+            }
+          },
+          "401": {
+            "description": "error"
+          },
+          "403": {
+            "description": "error permission "
+          },
+          "500": {
+            "description": "error"
+          }
+        }
+      }
+    },
+    "/entities/{name}": {
+      "get": {
+        "operationId": "getEntity",
+        "summary": "Get entity by entity name",
+        "description": "Get detail of entity by name",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "token",
+            "required": true,
+            "type": "string",
+            "description": "for access token (when you login)"
+          },
+          {
+            "in": "body",
+            "name": "name",
+            "required": true,
+            "type": "string",
+            "description": "Name of entity"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Entity"
+            }
+          },
+          "401": {
+            "description": "error"
+          },
+          "403": {
+            "description": "error permission"
+          },
+          "404": {
+            "description": "error not found"
+          },
+          "500": {
+            "description": "error"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteEntity",
+        "summary": "Delete entity by name",
+        "description": "Delete entity by entity name",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "token",
+            "required": true,
+            "type": "string",
+            "description": "for access token (when you login)"
+          },
+          {
+            "in": "body",
+            "name": "name",
+            "required": true,
+            "type": "string",
+            "description": "Name of entity"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Entity"
+            }
+          },
+          "401": {
+            "description": "error"
+          },
+          "403": {
+            "description": "error permission"
+          },
+          "404": {
+            "description": "error not found delete"
+          },
+          "500": {
+            "description": "error"
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateEntity",
+        "summary": "Update an existing entity",
+        "description": "Update an existing entity",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "token",
+            "required": true,
+            "type": "string",
+            "description": "for access token (when you login)"
+          },
+          {
+            "in": "body",
+            "name": "name",
+            "required": true,
+            "type": "string",
+            "description": "Name of update entity"
+          },
+          {
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Entity"
+            },
+            "description": "Update with new value of entity"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Entity"
+            }
+          },
+          "401": {
+            "description": "error"
+          },
+          "403": {
+            "description": "error permission"
+          },
+          "404": {
+            "description": "error not found update"
+          },
+          "409": {
+            "description": "error update not success"
+          },
+          "500": {
+            "description": "error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Feature": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Unique value of entity system"
+        },
+        "description": {
+          "type": "string",
+          "description": "Describes entity."
+        },
+        "keyWordingOfFeature": {
+          "type": "string",
+          "description": "Key word of feature"
+        }
+      }
+    },
+    "Entity": {
+      "id": "Entity",
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": "Unique value of entity system"
+        },
+        "revision": {
+          "type": "integer",
+          "description": "running number of version"
+        },
+        "name": {
+          "type": "string",
+          "description": "Unique name of entity system",
+          "required": true
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "GUEST",
+            "MEMBER",
+            "STAFF",
+            "ADMIN",
+            "MACHINE"
+          ],
+          "required": true
+        },
+        "featuresProvided": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Feature"
+          }
+        }
+      }
+    }
+  }
+}
