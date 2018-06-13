@@ -11,7 +11,6 @@ var skipModuleForGenerate = ['????????'];
 var skipServiceForGenerate = ['???????','????????'];
 var excelFileName = '../swagger-json-to-excel/output/SwaggerJsonToExcel.xlsx';
 
-
 /*****************************
  * Get JSON Swgger from URL
  *****************************/
@@ -62,11 +61,13 @@ function generateExcel() {
             }
             
             var serviceName = '';
-            if (itemMethod.summary) {
-                serviceName = itemMethod.summary.replace('/','') + 'Method type ' + method + ')';
+            if (itemMethod.operationId) {
+                serviceName = itemMethod.operationId.replace('/','');
             } else {
-                serviceName = itemMethod.operationId.replace('/','') + 'Method type ' + method + ')';
-            }
+                if (itemMethod.summary) {
+                    serviceName = itemMethod.summary.replace('/','');
+                }
+            }            
 
             var serviceDesc = '';
             if (itemMethod.description) {
@@ -77,15 +78,13 @@ function generateExcel() {
             if (skipModuleForGenerate.indexOf(moduleName) > -1) continue;
             if (skipServiceForGenerate.indexOf(serviceName) > -1) continue;
     
-            //if (serviceName != 'transferFund') continue;
-        
             var serviceModel = new modelService.modelService();
             console.log('module : ' + moduleName);
             serviceModel.module = moduleName;
             console.log('service : ' + serviceName);
             serviceModel.service = serviceName;
             serviceModel.description = serviceDesc;
-        
+            serviceModel.methodType = method;
             var param;
             var name;
             var paramType;
@@ -339,6 +338,8 @@ function generateExcel() {
     
         row++;
         ws.cell(row, 1,row,3,true).string('Service Name : ' + serviceList[service].service);
+        row++;
+        ws.cell(row, 1,row,3,true).string('Method Type : ' + serviceList[service].methodType);
         row++;
         ws.cell(row, 1,row,3,true).string('Description : ' + serviceList[service].description);
         row++;

@@ -4,6 +4,7 @@ var modelService = /** @class */ (function () {
     function modelService() {
         this.module = '';
         this.service = '';
+        this.methodType = '';
         this.description = '';
         this.request = [];
         this.response = [];
