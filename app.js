@@ -14,8 +14,8 @@ var excelFileName = '../swagger-json-to-excel/output/SwaggerJsonToExcel.xlsx';
 /*****************************
  * Get JSON Swgger from URL
  *****************************/
-//var swaggerJsonUrl = 'http://xxxxxxxxxxxxx:3000/explorer/swagger.json';
-//var json;
+// var swaggerJsonUrl = 'http://xxxxxxxxxxxxx:3000/explorer/swagger.json';
+// var json;
 // var options = {
 //     uri: swaggerJsonUrl,    
 //     json: true // Automatically stringifies the body to JSON
@@ -30,7 +30,7 @@ var excelFileName = '../swagger-json-to-excel/output/SwaggerJsonToExcel.xlsx';
 // })
 // .catch(function (err) {
 //     console.log('Error : ' + err);
-//});
+// });
 
 /****************************************
  * Use datasource file
